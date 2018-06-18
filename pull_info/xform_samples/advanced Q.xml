@@ -1,0 +1,64 @@
+<html:html xmlns="http://www.w3.org/2002/xforms" xmlns:html="http://www.w3.org/1999/xhtml"
+           xmlns:ns2="http://openrosa.org/javarosa">
+    <html:head>
+        <html:title>Simple xform</html:title>
+        <model>
+            <instance>
+                <tmpSNErWi id="tmpSNErWi">
+                    <intro/>
+                    <respondent_name/>
+                    <respondent_age/>
+                    <alive/>
+                    <commune/>
+                    <address/>
+                    <meta>
+                        <instanceID/>
+                    </meta>
+                    <form_code>087</form_code>
+                </tmpSNErWi>
+            </instance>
+            <bind nodeset="/tmpSNErWi/intro" readonly="true()" type="string"/>
+            <bind nodeset="/tmpSNErWi/respondent_name" required="true()" type="string"/>
+            <bind constraint=". &gt;=18" nodeset="/tmpSNErWi/respondent_age" type="int"
+                  ns2:constraintMsg="You must be over 18 to answer this Questionnaire"/>
+            <bind nodeset="/tmpSNErWi/alive" type="select1"/>
+            <bind nodeset="/tmpSNErWi/commune" relevant=" /tmpSNErWi/alive ='yes'" type="string"/>
+            <bind nodeset="/tmpSNErWi/address" type="string"/>
+            <bind calculate="concat('uuid:', uuid())" nodeset="/tmpSNErWi/meta/instanceID" readonly="true()"
+                  type="string"/>
+            <bind nodeset="/tmpSNErWi/form_code" type="string"/>
+        </model>
+    </html:head>
+    <html:body>
+        <input ref="/tmpSNErWi/intro">
+            <label>Household Survey - This form showcases advanced features such as skip logic, repeated sets of
+                questions, grouping of questions, constraints and calculations.
+            </label>
+        </input>
+        <input ref="/tmpSNErWi/respondent_name">
+            <label>Name</label>
+            <hint>Answer must fit on one line [Required]</hint>
+        </input>
+        <input ref="/tmpSNErWi/respondent_age">
+            <label>Age</label>
+            <hint>Answer must be a number [Constraint on input]</hint>
+        </input>
+        <select1 ref="/tmpSNErWi/alive">
+            <label>Alive</label>
+            <item>
+                <label>Yes</label>
+                <value>yes</value>
+            </item>
+            <item>
+                <label>No</label>
+                <value>no</value>
+            </item>
+        </select1>
+        <input ref="/tmpSNErWi/commune">
+            <label>Commune if alive</label>
+        </input>
+        <input ref="/tmpSNErWi/address">
+            <label>Adresse</label>
+        </input>
+    </html:body>
+</html:html>

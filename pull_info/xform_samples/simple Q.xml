@@ -1,0 +1,30 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:jr="http://openrosa.org/javarosa">
+    <h:head>
+        <h:title>simple quest</h:title>
+        <model>
+            <instance>
+                <data id="599db3f2814a11e5a2f712313d2da6d0">
+                    <eid>rep2</eid>                                            <q2/>
+                    <q3/>
+                    <form_code>046</form_code>
+                </data>
+            </instance>
+            <bind nodeset="/data/q2" type="decimal" required="true()"/>
+            <bind nodeset="/data/q3" type="string" constraint="string-length(.) &gt;= 1" required="true()"/>
+            <bind nodeset="/data/form_code" type="string">046</bind>
+
+        </model>
+    </h:head>
+    <h:body>
+        <input ref="q2">
+            <label>code client</label>
+            <hint>Answer must be a number.</hint>
+        </input>
+        <input ref="q3">
+            <label>Nom client</label>
+            <hint>Answer must be a word</hint>
+        </input>
+    </h:body>
+</h:html>
