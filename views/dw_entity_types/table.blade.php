@@ -12,7 +12,7 @@
         <tr>
             <td>{!! $dwEntityType->type !!}</td>
             <td>{!! $dwEntityType->comment !!}</td>
-            <td><?php echo config('constants.dwBaseUrl').$dwEntityType->apiUrl ?></td>
+            <td><?php echo config('dwsync.dwBaseUrl').$dwEntityType->apiUrl ?></td>
             <td>
                 {!! Form::open(['route' => ['dwsync.dwEntityTypes.destroy', $dwEntityType->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

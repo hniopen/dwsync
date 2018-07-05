@@ -201,7 +201,7 @@ class DwProject extends Model
 
     public function checkQuestionsFromDwSubmissions()
     {
-        $url = config('constants.dwBaseUrl').$this->dwEntityType->apiUrl . $this->questCode;
+        $url = config('dwsync.dwBaseUrl').$this->dwEntityType->apiUrl . $this->questCode;
         $vCredential = fctReversibleDecrypt($this->credential);
         if ($this->entityType == 'Q') {
             if ($this->startDate) {
@@ -467,7 +467,7 @@ class DwProject extends Model
     {
         set_time_limit(0);//forever
         DB::disableQueryLog();
-        $url = config('constants.dwBaseUrl').$this->dwEntityType->apiUrl . $this->questCode;
+        $url = config('dwsync.dwBaseUrl').$this->dwEntityType->apiUrl . $this->questCode;
         //TODO: check last submission datetime
         $this->refreshLastSubmission();//force refresh
         $lastSubmission = $this->getLastSubmission();

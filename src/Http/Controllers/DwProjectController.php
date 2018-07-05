@@ -530,9 +530,9 @@ class DwProjectController extends AppBaseController
      * @return Response
      */
     public function pushIdnr(){
-        $submission_url = config('constants.dwBaseUrl').'/xforms/submission';
-        $dwLogin = config('constants.dwLogin');
-        $dwPassword = config('constants.dwPassword');
+        $submission_url = config('dwsync.dwBaseUrl').'/xforms/submission';
+        $dwLogin = config('dwsync.dwLogin');
+        $dwPassword = config('dwsync.dwPassword');
 
         if(empty($dwLogin) || empty($dwPassword)){
             $pushResults = array(

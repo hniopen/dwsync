@@ -57,5 +57,6 @@ return [
     'account' => [
         'sms' => env('DW_SMS_ACCOUNT', 'false')
     ],
-    'overrideViews' => false//publish 'views' then turn it to true
+    'overrideViews' => false,//publish 'views' then turn it to true
+    'dwBaseUrl' => $dwBaseUrl
 ];
