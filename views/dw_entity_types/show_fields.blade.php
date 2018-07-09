@@ -13,6 +13,6 @@
 <!-- Apiurl Field -->
 <div class="form-group">
     {!! Form::label('apiUrl', 'Apiurl:') !!}
-    <p><?php echo config('constants.dwBaseUrl').$dwEntityType->apiUrl ?></p>
+    <p><?php echo config('dwsync.dwBaseUrl').$dwEntityType->apiUrl ?></p>
 </div>
 
