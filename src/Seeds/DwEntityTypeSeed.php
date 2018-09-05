@@ -4,6 +4,7 @@ namespace Hni\Dwsync\Seeds;
 use Illuminate\Database\Seeder;
 use Hni\Dwsync\Models\DwEntityType;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class DwEntityTypeSeed extends Seeder
 {
