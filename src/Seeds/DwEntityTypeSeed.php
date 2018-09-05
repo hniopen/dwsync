@@ -3,6 +3,7 @@ namespace Hni\Dwsync\Seeds;
 
 use Illuminate\Database\Seeder;
 use Hni\Dwsync\Models\DwEntityType;
+use Illuminate\Support\Facades\Schema;
 
 class DwEntityTypeSeed extends Seeder
 {
