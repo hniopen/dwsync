@@ -1,6 +1,7 @@
 <?php
 namespace Hni\Dwsync\Seeds;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DwQuestionsTableSeeder extends Seeder
 {
