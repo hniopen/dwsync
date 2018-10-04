@@ -441,6 +441,7 @@ class DwProjectController extends AppBaseController
     public function sync($id, Request $request)
     {
         set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         $input = $request->all();
         $dwProject = $this->dwProjectRepository->findWithoutFail($id);
         $tCheckResult = [];
@@ -465,6 +466,7 @@ class DwProjectController extends AppBaseController
     public function syncAllMarked(Request $request)
     {
         set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         $input = $request->all();
         $dwProjects = DwProject::where('autoSync', '>', 0)->get();
         $tCheckResult = [];
