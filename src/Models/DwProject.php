@@ -468,6 +468,7 @@ class DwProject extends Model
     public function sync()
     {
         set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         DB::disableQueryLog();
         $url = config('dwsync.dwBaseUrl').$this->dwEntityType->apiUrl . $this->questCode;
         //TODO: check last submission datetime
@@ -513,6 +514,7 @@ class DwProject extends Model
     private function pullFeedData($jsonResult)
     {
         set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         DB::disableQueryLog();
         $output = [];
         $tStatus = ['success' => 0, 'error' => 0, 'deleted' => 0, 'updated' => 0, 'inserted' => 0, 'wrong_idnr' => 0];
@@ -707,6 +709,8 @@ class DwProject extends Model
 
     private function saveFeedValuesFromJson($currentSubmission, $tQuestions, $path = null)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         DB::disableQueryLog();
         //if you modify this, please make sure to update saveApiValuesFromJson( ) too if needed
         foreach ($tQuestions as $xformQuestionId => $value) {
@@ -766,6 +770,7 @@ class DwProject extends Model
     private function pullApiData($jsonResult)
     {
         set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         DB::disableQueryLog();
         $output = [];
         $tStatus = ['active' => 0, 'error' => 0, 'deleted' => 0, 'updated' => 0, 'inserted' => 0];
@@ -837,6 +842,8 @@ class DwProject extends Model
 
     private function saveApiValuesFromJson($currentSubmission, $tQuestions)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
         DB::disableQueryLog();
         //if you modify this, please make sure to update saveFeedValuesFromJson( ) too if needed
         foreach ($tQuestions as $questionId => $value) {

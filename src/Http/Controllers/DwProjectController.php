@@ -442,6 +442,7 @@ class DwProjectController extends AppBaseController
     {
         set_time_limit(0);//forever
         ini_set('memory_limit','512M');
+        DB::disableQueryLog();
         $input = $request->all();
         $dwProject = $this->dwProjectRepository->findWithoutFail($id);
         $tCheckResult = [];
@@ -467,6 +468,7 @@ class DwProjectController extends AppBaseController
     {
         set_time_limit(0);//forever
         ini_set('memory_limit','512M');
+        DB::disableQueryLog();
         $input = $request->all();
         $dwProjects = DwProject::where('autoSync', '>', 0)->get();
         $tCheckResult = [];
@@ -512,6 +514,9 @@ class DwProjectController extends AppBaseController
      */
     public function syncAll()
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        DB::disableQueryLog();
         $dwProjects = $this->dwProjectRepository->scopeQuery(function($query){
                 return $query->orderBy('entityType','asc');
             })->where;
@@ -532,6 +537,9 @@ class DwProjectController extends AppBaseController
      * @return Response
      */
     public function pushIdnr(){
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        DB::disableQueryLog();
         $submission_url = config('dwsync.dwBaseUrl').'/xforms/submission';
         $dwLogin = config('dwsync.dwLogin');
         $dwPassword = config('dwsync.dwPassword');
