@@ -387,6 +387,8 @@ class DwProject extends Model
         $table = $this->getTableName();
         $result = false;
         foreach ($questions as $item => $t){
+            if (strpos($item, '@template') !== false)
+                continue;
             if(Schema::hasColumn($table, $item))
                 continue;
             if($sql != "")
@@ -603,6 +605,8 @@ class DwProject extends Model
     public function addRepeatQuestionsFromDataSync() {
         $insertCount = 0;
         foreach ($this->questionsToAdd as $currentDwQuestion){
+            if (strpos($currentDwQuestion->questionId, '@template') !== false)
+                continue;
             if(!$currentDwQuestion->id)
                 $insertCount++;
             $currentDwQuestion->save();
