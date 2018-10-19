@@ -369,16 +369,32 @@
         console.log("URL : " + url);
         hideNotif();
         statusProcessInsertActions(_actionBoxId);
+        var n = 100;
+        var splitedQuestions = splitObjectByNProp(questionsFromXls, n);
+        recursiveInsert(splitedQuestions, 0, "");
+    }
+
+    function recursiveInsert(splitedQuestions, i, oldMsg){
+        var _actionBoxId = "#formXls";
+        var _projectId = '{{$dwProject->id}}';
+        var url = '{{route('dwsync.dwProjects.insertFromXls')}}';
         $.ajax({
             type: 'post',
             url: url,
             dataType: 'json',
-            data: {_token: "{{ csrf_token() }}", projectId :_projectId, questions:questionsFromXls},
+            data: {_token: "{{ csrf_token() }}", projectId: _projectId, questions: splitedQuestions[i]},
             success: function (data, textStatus) {
                 console.log("Data " + JSON.stringify(data));
-                var message = data['message']['text'];
-                statusFinishInsertActions_withoutError(_actionBoxId);
-                notifSuccess(message);
+                var message = oldMsg + data['message']['text'];
+                if(typeof splitedQuestions[i+1] !== 'undefined') {// next exist
+                    recursiveInsert(splitedQuestions, i+1, message)
+                    console.log("next " + (i+1));
+                }
+                else {// next does not exist
+                    statusFinishInsertActions_withoutError(_actionBoxId);
+                    notifSuccess(message);
+                    console.log("Finished !");
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 var message = 'Error : ' + xhr.responseText;
@@ -386,6 +402,22 @@
                 notifError(message);
             }
         });
+    }
+
+    function splitObjectByNProp(myObj, n){
+        var splitedObj = [];
+        var keys = Object.keys(myObj);
+        for(var i = 0, j = 0; i <= keys.length - 1; i += n, j++){
+            var slicedKeys = keys.slice(i, i+n-1);
+            splitedObj[j] = {};
+            for(var k in slicedKeys){
+                if (slicedKeys.hasOwnProperty(k)) {// check if the property/key is defined in the object itself, not in parent
+                    var question = slicedKeys[k];
+                    splitedObj[j][question] = myObj[question];
+                }
+            }
+        }
+        return splitedObj;
     }
     // ] --- Xls
 

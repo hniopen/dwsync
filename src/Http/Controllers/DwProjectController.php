@@ -39,6 +39,9 @@ class DwProjectController extends AppBaseController
      */
     public function index(Request $request)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $this->dwProjectRepository->pushCriteria(new RequestCriteria($request));
         $dwProjects = $this->dwProjectRepository->scopeQuery(function($query){
             return $query->orderBy('entityType','asc');
@@ -56,6 +59,9 @@ class DwProjectController extends AppBaseController
      */
     public function extra($id)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $dwProject = $this->dwProjectRepository->findWithoutFail($id);
 
         if (empty($dwProject)) {
@@ -203,6 +209,9 @@ class DwProjectController extends AppBaseController
      */
     public function checkFromSubmissions($id,Request $request)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $input = $request->all();
         $fromDate = $input['fromDate'];
         $toDate = $input['toDate'];
@@ -225,6 +234,9 @@ class DwProjectController extends AppBaseController
      */
     public function insertFromSubmissions(Request $request)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $inputs = $request->all();
         $projectId = $inputs['projectId'];
         $dwProject = $this->dwProjectRepository->findWithoutFail($inputs['projectId']);
@@ -264,6 +276,9 @@ class DwProjectController extends AppBaseController
      */
     public function checkFromXform($id)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $dwProject = $this->dwProjectRepository->findWithoutFail($id);
         $tCheckResult = [];
         if (empty($dwProject)) {
@@ -281,6 +296,9 @@ class DwProjectController extends AppBaseController
      */
     public function insertFromXform(Request $request)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $inputs = $request->all();
         $projectId = $inputs['projectId'];
         $dwProject = $this->dwProjectRepository->findWithoutFail($inputs['projectId']);
@@ -321,6 +339,9 @@ class DwProjectController extends AppBaseController
      */
     public function checkFromXls($id, Request $request)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $dwProject = $this->dwProjectRepository->findWithoutFail($id);
         $tCheckResult = [];
         if (empty($dwProject)) {
@@ -341,6 +362,9 @@ class DwProjectController extends AppBaseController
      */
     public function insertFromXls(Request $request)
     {
+        set_time_limit(0);//forever
+        ini_set('memory_limit','512M');
+        ini_set('post_max_size', 0);//will not disable the limit when the content type >> Avoid post limit if questionnaire is too long
         $inputs = $request->all();
         $projectId = $inputs['projectId'];
         $dwProject = $this->dwProjectRepository->findWithoutFail($inputs['projectId']);
