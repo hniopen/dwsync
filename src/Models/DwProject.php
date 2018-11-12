@@ -749,8 +749,13 @@ class DwProject extends Model
                     else
                         $currentValue = $value;
 
-                    if($relatedDwQuestion->dataType == "date")
-                        $currentValue = fctReformatDateToYearMonthDay($currentValue, $relatedDwQuestion->periodType, $relatedDwQuestion->periodTypeFormat);
+                    if($currentSubmission->isValid == 0){//error
+                        if(strlen($currentValue) > 20)
+                            $currentValue = substr($currentValue, 0, 20);//Avoid insert error if data > VARCHAR(20)
+                    }else{//success
+                        if($relatedDwQuestion->dataType == "date")
+                            $currentValue = fctReformatDateToYearMonthDay($currentValue, $relatedDwQuestion->periodType, $relatedDwQuestion->periodTypeFormat);
+                    }
 
                     //Check if linked_idnr value in idnr list (IDNR exists) ##### Fire event
                     //TODO : call external event definition

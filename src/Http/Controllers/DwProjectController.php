@@ -13,6 +13,7 @@ use Hni\Dwsync\Repositories\DwProjectRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Mockery\Exception;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Hni\Dwsync\Models\DwEntityType;
@@ -505,7 +506,15 @@ class DwProjectController extends AppBaseController
                     $fromDate = $input['from'];
                     $dwProject->setStartDate($fromDate);
                 }
-                $tCheckResult[] = $dwProject->sync();
+
+                try{
+                    $tCheckResult[] = $dwProject->sync();
+                }catch (Exception $e){
+                    $tCheckResult[] = [
+                        "info"=> "An error has occured when syncing project ".$dwProject->questCode. " (".$dwProject->comment.")",
+                        "error"=> $e->getMessage()
+                    ];
+                }
             }
         }
         return response()->json($tCheckResult);
