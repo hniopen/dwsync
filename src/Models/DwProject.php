@@ -519,7 +519,7 @@ class DwProject extends Model
         $output = [];
         $tStatus = ['success' => 0, 'error' => 0, 'deleted' => 0, 'updated' => 0, 'inserted' => 0, 'wrong_idnr' => 0];
         $uniqueQuestionsForDuplicates = $this->getUniqueQuestions()->get()->toArray();
-        foreach ($jsonResult as $item) {
+        foreach ((array) $jsonResult as $item) {
             //Datas
             $status = $item['status'];//success, deleted, error, ...
             $dataSenderId = $item['data_sender_id'];//code or phone number (if not registered)
@@ -779,7 +779,7 @@ class DwProject extends Model
         DB::disableQueryLog();
         $output = [];
         $tStatus = ['active' => 0, 'error' => 0, 'deleted' => 0, 'updated' => 0, 'inserted' => 0];
-        foreach ($jsonResult as $item) {
+        foreach ((array) $jsonResult as $item) {
             //Datas
             $status = $item['status'];//active, deleted, ...
             $submission_time = $item['submission_time'];//2014-12-01 07:16:06.232944+00:00
